@@ -13,5 +13,4 @@ function BoughtList({ items, toggleBought }) {
     </div>
   );
 }
-
 export default BoughtList;

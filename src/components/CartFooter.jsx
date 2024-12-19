@@ -5,5 +5,4 @@ function CartFooter() {
     </footer>
   );
 }
-
 export default CartFooter;

@@ -1,19 +1,52 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import CartHeader from "./components/CartHeader";
 import ShopList from "./components/ShopList";
 import CartInput from "./components/CartInput";
 import BoughtList from "./components/BoughtList";
 import CartFooter from "./components/CartFooter";
+import { use } from "react";
 
 function App() {
-  const [itemList, setItemList] = useState([
-    { id: 1, name: "무", isBought: false },
-    { id: 2, name: "배추", isBought: false },
-    { id: 3, name: "쪽파", isBought: true },
-    { id: 4, name: "고춧가루", isBought: false },
-  ]);
+  const apiUrl = "http://localhost:3000/shoplist";
+  // 서버로부터 API 호출해서 쇼핑 목록 받아오기
+  // const [itemList, setItemList] = useState([
+  //   { id: 1, name: "무", isBought: false },
+  //   { id: 2, name: "배추", isBought: false },
+  //   { id: 3, name: "쪽파", isBought: true },
+  //   { id: 4, name: "고춧가루", isBought: false },
+  // ]);
+  const [itemList, setItemList] = useState([]);
+  // 산 물건 받아오는 함수
   const [showBought, setShowBought] = useState(false);
+  // 페이지 로딩 상태 체크 state
+  const [isLoading, setIsLoading] = useState(true);
+  // 에러메세지 출력을 위한 state
+  const [error, setError] = useState(true);
+
+  // API에서 목록 받아오는 함수
+  const fetchItems = async () => {
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error("데이터를 받아오지 못했습니다.");
+      }
+      const data = await response.json();
+      // console.log(data);
+      setItemList(data);
+      setIsLoading(false); // 로딩이 끝낫음을 알림
+    } catch (err) {
+      // console.error(err);
+      setError(err.message);
+      setIsLoading(false); // 로딩이 끝남
+    }
+  };
+  useEffect(() => {
+    fetchItems();
+  }, []); // -> 컨포넌트가 처음 로딩되었을때의 이펙트 발생
+
+  if (isLoading) return <div>로딩 중.....</div>;
+  // if (error) return <div>에러: {error}</div>;
 
   // 구매하지 않은 항목 필터링
   const shopItems = itemList.filter((item) => !item.isBought);
