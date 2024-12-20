@@ -13,6 +13,7 @@ function CartInput({ addNewItem }) {
       <button
         onClick={() => {
           if (inputValue.trim() !== "") {
+            //  추가
             addNewItem(inputValue);
             setInputValue("");
           }
@@ -23,5 +24,4 @@ function CartInput({ addNewItem }) {
     </section>
   );
 }
-
 export default CartInput;
