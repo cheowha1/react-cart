@@ -12,8 +12,8 @@
     },
     {
       "id": "3",
-      "name": "PUT TEXT",
-      "isBought": false
+      "name": "쪽파",
+      "isBought": true
     },
     {
       "id": "4",

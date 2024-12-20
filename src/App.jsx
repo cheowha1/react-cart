@@ -8,7 +8,7 @@ import CartFooter from "./components/CartFooter";
 import { use } from "react";
 
 function App() {
-  const apiUrl = "http://localhost:3000/shoplist";
+  const apiUrl = "http://localhost:1337/shoplist";
   // 서버로부터 API 호출해서 쇼핑 목록 받아오기
   // const [itemList, setItemList] = useState([
   //   { id: 1, name: "무", isBought: false },
@@ -99,7 +99,7 @@ function App() {
           toggleBought={toggleBought}
           deleteItem={deleteItem}
         />
-        <CartInput addItem={addItem} />
+        <CartInput addNewItem={addItem} />
         <div>
           <input
             type="checkbox"

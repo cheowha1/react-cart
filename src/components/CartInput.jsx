@@ -1,24 +1,25 @@
 import { useState } from "react";
 
-function CartInput({ onAdd }) {
+function CartInput({ addNewItem }) {
   const [inputValue, setInputValue] = useState("");
-
-  const handleAdd = () => {
-    if (inputValue.trim() !== "") {
-      onAdd(inputValue);
-      setInputValue("");
-    }
-  };
 
   return (
     <section>
       <input
         type="text"
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        placeholder="물건 이름 입력"
+        onChange={(event) => setInputValue(event.target.value)}
       />
-      <button onClick={handleAdd}>추가</button>
+      <button
+        onClick={() => {
+          if (inputValue.trim() !== "") {
+            addNewItem(inputValue);
+            setInputValue("");
+          }
+        }}
+      >
+        추가
+      </button>
     </section>
   );
 }
